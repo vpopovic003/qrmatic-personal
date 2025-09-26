@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { supabase } from '@/lib/supabaseClient'
+import { createClient } from '@/lib/supabase-server'
 import { headers } from 'next/headers'
 
 export default async function RedirectPage({ params }) {
@@ -11,6 +11,8 @@ export default async function RedirectPage({ params }) {
   const ipAddress = forwardedFor?.split(',')[0] || realIp || 'unknown'
 
   try {
+    const supabase = createClient()
+
     const { data: qrCode, error } = await supabase
       .from('qrcodes')
       .select('id, target_url')
