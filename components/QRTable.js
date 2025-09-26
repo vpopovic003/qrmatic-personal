@@ -74,6 +74,14 @@ export default function QRTable({ qrCodes, onDelete }) {
                   >
                     View
                   </Link>
+                  {qr.type === 'dynamic' && (
+                    <Link
+                      href={`/dashboard/edit/${qr.id}`}
+                      className={styles.actionBtn}
+                    >
+                      Edit
+                    </Link>
+                  )}
                   <button
                     onClick={() => downloadQR(qr.short_code, qr.target_url)}
                     className={styles.actionBtn}
