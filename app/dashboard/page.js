@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { supabase } from '@/lib/supabaseClient'
+import { createClient } from '@/lib/supabase-client'
 import { getCurrentUser } from '@/lib/auth'
 import QRTable from '@/components/QRTable'
 import styles from './dashboard.module.css'
@@ -19,6 +19,7 @@ export default function DashboardPage() {
         setUser(currentUser)
 
         if (currentUser) {
+          const supabase = createClient()
           const { data, error } = await supabase
             .from('qrcodes')
             .select(`
@@ -51,6 +52,7 @@ export default function DashboardPage() {
     if (!confirm('Are you sure you want to delete this QR code?')) return
 
     try {
+      const supabase = createClient()
       const { error } = await supabase
         .from('qrcodes')
         .delete()

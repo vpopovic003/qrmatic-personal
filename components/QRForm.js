@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import QRCode from 'qrcode'
-import { supabase } from '@/lib/supabaseClient'
+import { createClient } from '@/lib/supabase-client'
 import { getCurrentUser, generateShortCode } from '@/lib/auth'
 import styles from './QRForm.module.css'
 
@@ -26,6 +26,7 @@ export default function QRForm({ onSuccess }) {
       const shortCode = generateShortCode()
       const qrUrl = `${window.location.origin}/r/${shortCode}`
 
+      const supabase = createClient()
       const { data, error: dbError } = await supabase
         .from('qrcodes')
         .insert({

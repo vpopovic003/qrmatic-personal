@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import { supabase } from '@/lib/supabaseClient'
+import { createClient } from '@/lib/supabase-client'
 import { getCurrentUser } from '@/lib/auth'
 import AnalyticsChart from '@/components/AnalyticsChart'
 import styles from './analytics.module.css'
@@ -20,6 +20,7 @@ export default function QRAnalyticsPage() {
         const user = await getCurrentUser()
         if (!user) throw new Error('User not authenticated')
 
+        const supabase = createClient()
         const { data: qrData, error: qrError } = await supabase
           .from('qrcodes')
           .select('*')

@@ -17,15 +17,26 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
-    const { data, error } = await signIn(email, password)
+    try {
+      const { data, error } = await signIn(email, password)
 
-    if (error) {
-      setError(error.message)
-    } else {
-      router.push('/dashboard')
+      if (error) {
+        setError(error.message)
+        setLoading(false)
+        return
+      }
+
+      if (data?.user) {
+        // Force a page refresh to ensure middleware picks up the new session
+        window.location.href = '/dashboard'
+      } else {
+        setError('Login failed')
+        setLoading(false)
+      }
+    } catch (err) {
+      setError('An unexpected error occurred')
+      setLoading(false)
     }
-
-    setLoading(false)
   }
 
   return (
