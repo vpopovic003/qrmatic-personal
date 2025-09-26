@@ -15,11 +15,17 @@ export default async function RedirectPage({ params }) {
 
     const { data: qrCode, error } = await supabase
       .from('qrcodes')
-      .select('id, target_url')
+      .select('id, target_url, type')
       .eq('short_code', short_code)
       .single()
 
     if (error || !qrCode) {
+      redirect('/404')
+    }
+
+    // Only handle dynamic QR codes through redirect
+    // Static QR codes should point directly to their target URLs
+    if (qrCode.type !== 'dynamic') {
       redirect('/404')
     }
 

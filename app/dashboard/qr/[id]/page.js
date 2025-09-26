@@ -149,6 +149,15 @@ export default function QRAnalyticsPage() {
             <code>{qrCode.short_code}</code>
           </div>
           <div className={styles.infoItem}>
+            <span className={styles.label}>QR Code URL:</span>
+            <code>
+              {qrCode.type === 'static'
+                ? qrCode.target_url
+                : `${window.location.origin}/r/${qrCode.short_code}`
+              }
+            </code>
+          </div>
+          <div className={styles.infoItem}>
             <span className={styles.label}>Target URL:</span>
             <a href={qrCode.target_url} target="_blank" rel="noopener noreferrer">
               {qrCode.target_url}
@@ -163,10 +172,23 @@ export default function QRAnalyticsPage() {
         </div>
       </div>
 
+      {qrCode.type === 'static' && analytics.totalScans === 0 && (
+        <div className={styles.staticInfo}>
+          <h3>📱 Static QR Code</h3>
+          <p>
+            This QR code points directly to <strong>{qrCode.target_url}</strong> and doesn't track scans.
+            Only dynamic QR codes (which redirect through our system) can provide detailed analytics.
+          </p>
+        </div>
+      )}
+
       <div className={styles.stats}>
         <div className={styles.statCard}>
           <h3>Total Scans</h3>
           <div className={styles.statValue}>{analytics.totalScans}</div>
+          {qrCode.type === 'static' && (
+            <small>Only tracked if scanned before switching to direct linking</small>
+          )}
         </div>
         <div className={styles.statCard}>
           <h3>Last 7 Days</h3>

@@ -5,9 +5,14 @@ import QRCode from 'qrcode'
 import styles from './QRTable.module.css'
 
 export default function QRTable({ qrCodes, onDelete }) {
-  const downloadQR = async (shortCode, targetUrl) => {
+  const downloadQR = async (shortCode, targetUrl, type) => {
     try {
-      const qrUrl = `${window.location.origin}/r/${shortCode}`
+      // For static QR codes, use the target URL directly
+      // For dynamic QR codes, use the redirect URL
+      const qrUrl = type === 'static'
+        ? targetUrl
+        : `${window.location.origin}/r/${shortCode}`
+
       const qrDataUrl = await QRCode.toDataURL(qrUrl, {
         width: 256,
         margin: 2,
@@ -47,17 +52,24 @@ export default function QRTable({ qrCodes, onDelete }) {
                 <code className={styles.shortCode}>{qr.short_code}</code>
               </td>
               <td>
-                <a
-                  href={qr.target_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.url}
-                >
-                  {qr.target_url.length > 50
-                    ? `${qr.target_url.substring(0, 50)}...`
-                    : qr.target_url
-                  }
-                </a>
+                <div className={styles.urlContainer}>
+                  <a
+                    href={qr.target_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.url}
+                  >
+                    {qr.target_url.length > 50
+                      ? `${qr.target_url.substring(0, 50)}...`
+                      : qr.target_url
+                    }
+                  </a>
+                  {qr.type === 'static' && (
+                    <span className={styles.directIcon} title="QR code points directly to this URL">
+                      🔗
+                    </span>
+                  )}
+                </div>
               </td>
               <td>
                 <span className={`${styles.badge} ${styles[qr.type]}`}>
@@ -83,7 +95,7 @@ export default function QRTable({ qrCodes, onDelete }) {
                     </Link>
                   )}
                   <button
-                    onClick={() => downloadQR(qr.short_code, qr.target_url)}
+                    onClick={() => downloadQR(qr.short_code, qr.target_url, qr.type)}
                     className={styles.actionBtn}
                   >
                     Download

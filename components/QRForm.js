@@ -24,7 +24,12 @@ export default function QRForm({ onSuccess }) {
       if (!user) throw new Error('User not authenticated')
 
       const shortCode = generateShortCode()
-      const qrUrl = `${window.location.origin}/r/${shortCode}`
+
+      // For static QR codes, use the target URL directly
+      // For dynamic QR codes, use the redirect URL
+      const qrUrl = type === 'static'
+        ? targetUrl
+        : `${window.location.origin}/r/${shortCode}`
 
       const supabase = createClient()
       const { data, error: dbError } = await supabase
@@ -89,8 +94,13 @@ export default function QRForm({ onSuccess }) {
             </div>
 
             <div className={styles.infoItem}>
-              <label>Short URL:</label>
-              <code>{window.location.origin}/r/{createdQR.short_code}</code>
+              <label>{createdQR.type === 'static' ? 'QR Code Points To:' : 'Short URL:'}:</label>
+              <code>
+                {createdQR.type === 'static'
+                  ? createdQR.target_url
+                  : `${window.location.origin}/r/${createdQR.short_code}`
+                }
+              </code>
             </div>
 
             <div className={styles.infoItem}>
