@@ -10,7 +10,7 @@ export default async function RedirectPage({ params }) {
   const realIp = headersList.get("x-real-ip");
   const ipAddress = forwardedFor?.split(",")[0] || realIp || "unknown";
 
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Look up the QR code
   const { data: qrCode, error } = await supabase

@@ -2,6 +2,11 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
+  // Skip middleware for redirect routes - they should be public
+  if (request.nextUrl.pathname.startsWith('/r/')) {
+    return NextResponse.next()
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -47,5 +52,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login'],
+  matcher: ['/dashboard/:path*', '/login', '/r/:path*'],
 }
