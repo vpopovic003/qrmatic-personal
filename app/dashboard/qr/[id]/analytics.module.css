@@ -1,0 +1,196 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 4rem;
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #dc3545;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.qrInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #495057;
+  min-width: 100px;
+}
+
+.qrInfo code {
+  background: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.qrInfo a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.qrInfo a:hover {
+  text-decoration: underline;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.badge.static {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge.dynamic {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.statCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.statCard h3 {
+  color: #666;
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.chartCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chartCard h3 {
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.recentScans {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.recentScans h3 {
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.scansList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.scanItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.scanTime {
+  color: #333;
+  font-weight: 500;
+}
+
+.scanInfo {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .qrInfo {
+    padding: 1rem;
+  }
+
+  .infoItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .label {
+    min-width: auto;
+  }
+
+  .charts {
+    grid-template-columns: 1fr;
+  }
+
+  .scanItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

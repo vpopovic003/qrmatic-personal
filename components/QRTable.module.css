@@ -1,0 +1,96 @@
+.tableContainer {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #f8f9fa;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.table tr:hover {
+  background: #f8f9fa;
+}
+
+.shortCode {
+  background: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #495057;
+}
+
+.url {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.url:hover {
+  text-decoration: underline;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.badge.static {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge.dynamic {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actionBtn {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #dee2e6;
+  background: white;
+  color: #495057;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover {
+  background: #f8f9fa;
+  color: #333;
+}
+
+.actionBtn.delete {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.actionBtn.delete:hover {
+  background: #dc3545;
+  color: white;
+}
